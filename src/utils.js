@@ -50,21 +50,49 @@ const gregorianConfigs = {
   dateFormat: 'YYYY/MM/DD',
   monthYearFormat: 'YYYY MM',
   timeFormat: 'HH:mm',
-  hour: 'Hour',
-  minute: 'Minute',
-  timeSelect: 'Select',
-  timeClose: 'Close',
+  hour: 'ชั่วโมง',
+  minute: 'นาที',
+  timeSelect: 'เลือก',
+  timeClose: 'ปิด',
 };
+const thaiConfigs =  {
+  dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+  dayNamesShort: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'],
+  monthNames: [
+    'มกราคม',
+    'กุมภาพันธ์',
+    'มีนาคม',
+    'เมษายน',
+    'พฤษภาคม',
+    'มิถุนายน',
+    'กรกฎาคม',
+    'สิงหาคม',
+    'กันยายน',
+    'ตุลาคม',
+    'พฤศจิกายน',
+    'ธันวาคม',
+  ],
+  selectedFormat: 'YYYY/MM/DD',
+  dateFormat: 'YYYY/MM/DD',
+  monthYearFormat: 'YYYY MM',
+  timeFormat: 'HH:mm',
+  hour: 'ชั่วโมง',
+  minute: 'นาที',
+  timeSelect: 'เลือก',
+  timeClose: 'ปิด',
+}
+
 
 class utils {
-  constructor({minimumDate, maximumDate, isGregorian, mode, reverse, configs}) {
+  constructor({minimumDate, maximumDate, isGregorian, mode, reverse, configs , isThai}) {
     this.data = {
       minimumDate,
       maximumDate,
       isGregorian,
+      isThai,
       reverse: reverse === 'unset' ? !isGregorian : reverse,
     };
-    this.config = isGregorian ? gregorianConfigs : jalaaliConfigs;
+    this.config = isGregorian ? gregorianConfigs : isThai  ? thaiConfigs : jalaaliConfigs;
     this.config = {...this.config, ...configs};
     if (mode === 'time' || mode === 'datepicker') {
       this.config.selectedFormat = this.config.dateFormat + ' ' + this.config.timeFormat;
